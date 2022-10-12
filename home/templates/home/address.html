@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <form action="address" method="post">
+            {% csrf_token %}
+            <label>street</label><br>
+            <input type="text" name="street"/><br><br>
+            <label>City</label><br>
+            <input type="text" name="city"/><br><br>
+            <label>State</label><br>
+            <input type="text" name="state"/><br><br>
+            <label>Country</label><br>
+            <input type="text" name="country"/><br><br>
+            <label>Zip</label><br>
+            <input type="text" name="zip"/><br><br>
+            <br>
+            <input type="submit" value="Submit" /><br><br>
+        </form>
+        
+        <script src="" async defer></script>
+    </body>
+</html>
