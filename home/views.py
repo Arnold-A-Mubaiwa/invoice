@@ -1,3 +1,4 @@
+from email import message
 from importlib.abc import Loader
 from turtle import st
 from unittest import loader
@@ -16,6 +17,14 @@ def addAddress(request):
     state = request.POST['state']
     country = request.POST['country']
     zip = request.POST['zip']
+
+    if (len(zip)>5):
+        message = "The length of your zip code is too long"
+        context = {
+            "message": message
+        }
+        return render(request, "home/address.html", context)
+    
     template = loader.get_template("home/address.html")
     new_addr = Address(street=street, city=city, state=state, country=country, zip_code = zip)
     if(new_addr):
