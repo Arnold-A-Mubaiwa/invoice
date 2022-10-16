@@ -12,6 +12,7 @@ def index(request):
     return render(request, "home/address.html")
 # adding to database
 def addAddress(request):
+    # not secure
     street = request.POST['street']
     city = request.POST['city']
     state = request.POST['state']
@@ -26,6 +27,7 @@ def addAddress(request):
         return render(request, "home/address.html", context)
     
     template = loader.get_template("home/address.html")
+    
     new_addr = Address(street=street, city=city, state=state, country=country, zip_code = zip)
     if(new_addr):
         template = loader.get_template("home/success.html")
