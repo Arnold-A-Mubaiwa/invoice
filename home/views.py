@@ -4,7 +4,7 @@ from turtle import st
 from unittest import loader
 from django.shortcuts import render
 from django.http import HttpResponse
-from .models import Address
+from .models import Address, Company,CompanyModel
 from django.template import loader
 
 # Create your views here.
@@ -40,3 +40,18 @@ def addAddress(request):
 # def all_actions(self, request, id):
 #     addAddress()
 #     index()
+
+def addCompany(request):
+    if request.method == 'POST':
+        form = CompanyModel(request.POST)
+        if form.is_valid():
+            form.save()
+            message = "Form successfully saved"
+            context = {
+                'message':message,
+                'form':form,
+            }
+            return render(request, 'home/addCompany.html',context)
+    else:
+        form = CompanyModel
+        return render(request, 'home/addCompany.html',{'form':form})

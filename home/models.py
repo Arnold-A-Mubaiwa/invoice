@@ -1,7 +1,10 @@
+from dataclasses import fields
 from enum import unique
+from msilib.schema import Class
 from pydoc import describe
 from unittest.util import _MAX_LENGTH
 from django.db import models
+from django.forms import ModelForm
 
 # Create your models here.
 class Address(models.Model):
@@ -12,7 +15,7 @@ class Address(models.Model):
     zip_code = models.CharField( max_length=5)
 
     def __str__(self):
-        return self.id
+        return self.street
 
 class Company(models.Model):
     company_name = models.CharField(max_length=100)
@@ -24,6 +27,14 @@ class Company(models.Model):
     def __str__(self):
         return self.company_name
 
+class CompanyModel(ModelForm):
+    class Meta:
+        model = Company
+        fields = [
+            'company_name','company_slogan','address','phone_number','email'
+        ]
+
+
 class To(models.Model):
     recepiant_name = models.CharField(max_length=50)
     company_name = models.CharField(blank=False, max_length=50)
@@ -33,6 +44,17 @@ class To(models.Model):
     
     def __str__(self):
         return self.company_name
+
+class ToModel(ModelForm):
+    class Meta:
+        model =  To
+        fields = [
+            'receipant_name',
+            'company_name',
+            'address',
+            'phone_number',
+            'email'
+        ]
 
 class Employee(models.Model):
     employee_id = models.CharField( max_length=50)
