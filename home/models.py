@@ -49,7 +49,7 @@ class ToModel(ModelForm):
     class Meta:
         model =  To
         fields = [
-            'receipant_name',
+            'recepiant_name',
             'company_name',
             'address',
             'phone_number',
@@ -65,6 +65,16 @@ class Employee(models.Model):
     def __str__(self):
         return self.name + " " + self.surname
 
+class EmployeeModel(ModelForm):
+    class Meta:
+        model =Employee
+        fields = [
+            'employee_id',
+            'name',
+            'surname',
+            'email'
+        ]
+
 class invoice(models.Model):
     invoice_number = models.CharField(max_length=9)
     invoice_date = models.DateField(auto_now_add=True)
@@ -75,6 +85,16 @@ class invoice(models.Model):
     def __str__(self):
         return self.invoice_number
 
+class InvoiceModel(ModelForm):
+    class Meta:
+        model = invoice
+        fields = [
+            'invoice_number',
+            'due_date',
+            'generated_by',
+            'employee_id'
+        ]
+
 class Product(models.Model):
     product_id = models.IntegerField()
     product_name = models.CharField(max_length=250)
@@ -83,3 +103,14 @@ class Product(models.Model):
 
     def __str__(self):
         return self.product_name
+
+class ProductModel(ModelForm):
+    class Meta:
+        model = Product
+        fields = [
+            'product_id',
+            'product_name',
+            'describion',
+            'unit_price'
+        ]
+        
